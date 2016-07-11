@@ -1,0 +1,261 @@
+font pango:Fira Mono 8
+exec urxvt
+exec_always ~/opt/compton/compton
+exec_always pidof clipit || clipit -n
+exec_always pidof xedgewarp || xedgewarp
+#exec_always sh ~/.fehbg
+#exec_always ~/.i3/scripts/browser-tab-open-focus.js
+exec_always ~/.i3/scripts/disable-standby-fs.py
+#exec_always dunst -geometry 0x
+exec_always 'hsetroot -solid #073642'
+#exec nm-applet
+
+focus_on_window_activation urgent
+
+#fake-outputs 1024x768+0+0, 1024x768+1024+0
+
+workspace_layout stacked
+
+#new_window normal 6
+#for_window [window_type="dialog"] border pixel
+
+bindsym --whole-window $mod+button2 kill
+bindsym --release button2 kill
+bindsym button2 nop
+bindsym button3 move container to output right; focus output right;
+#bindsym button4 kill
+#bindsym $mod+button4 focus up
+#bindsym $mod+button5 focus down
+bindsym button9 move left
+bindsym button8 move right
+#bindsym --whole-window button1 nop
+
+#bindsym a move left
+
+for_window [class="Thunderbird"] border pixel
+for_window [class="Spotify"] border pixel
+for_window [instance="Firebug"] border pixel
+for_window [class="Firefox"] border none
+for_window [title="^Steam - Update News"] kill
+for_window [class="Tor Browser"] border pixel 4, floating enable; exec 'xclip < /dev/null'
+
+for_window [title="96 dpi"] mark foo
+
+# Vim directions
+set $up k
+set $down j
+set $left h
+set $right l
+
+# Modifier keys
+set $mod Mod4
+set $mod2 Mod1
+
+bindsym --whole-window --release $mod+b move scratchpad
+bindsym $mod+$mod2+b scratchpad show
+
+workspace 1 output HDMI-0
+workspace 3 output HDMI-0
+workspace 5 output HDMI-0
+workspace 7 output HDMI-0
+workspace 9 output HDMI-0
+workspace 0 output DVI-D-0
+workspace 2 output DVI-D-0
+workspace 4 output DVI-D-0
+workspace 6 output DVI-D-0
+workspace 8 output DVI-D-0
+workspace 10 output DVI-D-0
+
+# Window specific
+assign [class="Spotify"] 6
+assign [class="Thunderbird"] 4
+
+# Spotify media keys
+bindsym $mod+space exec --no-startup-id playerctl play-pause
+bindsym $mod+$mod2+space exec --no-startup-id playerctl next
+bindsym $mod+$mod2+r exec --no-startup-id ~/.i3/scripts/i3-container-commander.py -- -fn 'Fira Mono -20' -f -i
+
+ 
+# Home row
+bindsym $mod+a workspace number 1
+bindsym $mod+$mod2+a move to workspace number 1; workspace number 1
+bindsym $mod+s workspace number 3
+bindsym $mod+$mod2+s move to workspace number 3; workspace number 3
+bindsym $mod+d workspace number 5
+bindsym $mod+$mod2+d move to workspace number 5; workspace number 5
+bindsym $mod+f workspace number 7
+bindsym $mod+$mod2+f move to workspace number 7; workspace number 7
+
+bindsym $mod+z workspace number 0
+bindsym $mod+$mod2+z move to workspace number 0; workspace number 0
+bindsym $mod+x workspace number 2
+bindsym $mod+$mod2+x move to workspace number 2; workspace number 2
+bindsym $mod+c workspace number 4
+bindsym $mod+$mod2+c move to workspace number 4; workspace number 4
+bindsym $mod+v workspace number 6
+bindsym $mod+$mod2+v move to workspace number 6; workspace number 6
+
+# Run
+bindsym $mod+e exec chromium
+bindsym Mod1+Shift+e exec "test -f /tmp/i3-nagbar$DISPLAY.lock || (touch /tmp/i3-nagbar-$USER-$DISPLAY.lock && i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'; rm /tmp/i3-nagbar-$USER-$DISPLAY.lock)"
+bindsym $mod+$mod2+e exec --no-startup-id ~/.i3/scripts/i3-cmd.py
+bindsym $mod+g exec firefox
+bindsym $mod+t exec --no-startup-id urxvt -cd "$(xcwd)"
+#bindsym $mod+t exec urxvtcd
+bindsym $mod+r exec --no-startup-id dmenu_run -fn 'Fira Mono -20' -f -i
+
+# Audio controls
+#bindsym $mod+Up exec "amixer set Master 2dB+"
+#bindsym $mod+Down exec "amixer set Master 2dB-"
+
+# Remove borders
+#hide_edge_borders both
+
+# Focus follows keyboard
+focus_follows_mouse no
+mouse_warping none
+
+#exec xfce4-panel
+# Bar options
+bar {
+  verbose true
+  #output primary
+  #tray_output DVI-D-0
+  #status_command i3status
+  status_command ~/projects/i3-dstatus/i3-dstatus
+  #status_command i3status
+  position top
+  #font pango:Fira Mono 22
+  i3bar_command ~/projects/i3/i3bar/i3bar &> /dev/null
+  workspace_buttons yes
+  #strip_workspace_numbers yes
+  #bindsym button3 exec skippy-xd
+  #bindsym button4 nop
+  #bindsym button5 nop
+  separator_symbol "●"
+  colors {
+    separator #dc322f
+    background #002b36
+    statusline #268bd2
+    focused_workspace #fdf6e3 #859900 #fdf6e3
+    active_workspace #fdf6e3 #6c71c4 #fdf6e3
+    inactive_workspace #586e75 #93a1a1 #002b36
+    urgent_workspace #d33682 #d33682 #fdf6e3
+  }
+}
+
+# Switch monitors
+bindsym $mod+Tab move container to output right; focus output right;
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# kill focused window
+bindsym $mod+w kill
+
+# move
+bindsym $mod+$mod2+$left move left
+bindsym $mod+$mod2+$down move down
+bindsym $mod+$mod2+$up move up
+bindsym $mod+$mod2+$right move right
+
+# focus
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# split
+bindsym $mod+$mod2+slash splith
+bindsym $mod+slash splitv
+
+# fullscreen
+bindsym $mod+m fullscreen
+bindsym $mod+$mod2+m focus parent; fullscreen; focus child
+
+# layout
+bindsym $mod+$mod2+comma layout tabbed
+bindsym $mod+comma layout stacking
+bindsym $mod+period layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+BackSpace floating toggle
+
+# focus the parent container
+bindsym $mod+p focus parent
+bindsym $mod+n focus child
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# switch to workspace
+bindsym $mod+grave  workspace 0
+bindsym $mod+1      workspace 1
+bindsym $mod+2      workspace 2
+bindsym $mod+3      workspace 3
+bindsym $mod+4      workspace 4
+bindsym $mod+5      workspace 5
+bindsym $mod+6      workspace 6
+bindsym $mod+7      workspace 7
+bindsym $mod+8      workspace 8
+bindsym $mod+9      workspace 9
+bindsym $mod+0      workspace 10
+
+# move focused container to workspace
+bindsym $mod+$mod2+grave move container to workspace 0; workspace 0
+bindsym $mod+$mod2+1 move container to workspace 1; workspace 1
+bindsym $mod+$mod2+2 move container to workspace 2; workspace 2
+bindsym $mod+$mod2+3 move container to workspace 3; workspace 3
+bindsym $mod+$mod2+4 move container to workspace 4; workspace 4
+bindsym $mod+$mod2+5 move container to workspace 5; workspace 5
+bindsym $mod+$mod2+6 move container to workspace 6; workspace 6
+bindsym $mod+$mod2+7 move container to workspace 7; workspace 7
+bindsym $mod+$mod2+8 move container to workspace 8; workspace 8
+bindsym $mod+$mod2+9 move container to workspace 9; workspace 9
+bindsym $mod+$mod2+0 move container to workspace 10; workspace 10
+
+# reload the configuration file
+bindsym $mod+q reload
+
+# resize window (you can also use the mouse for that)
+mode "normal" {
+  bindsym $left focus left
+  bindsym $up focus up
+  bindsym $down focus down
+  bindsym $right focus right
+
+  bindsym $mod+$left workspace prev_on_output
+  bindsym $mod+$up focus output right
+  bindsym $mod+$down focus output left
+  bindsym $mod+$right workspace next_on_output
+
+  bindsym $mod+$mod2+$left resize shrink left 10 px or 10 ppt
+  bindsym $mod+$mod2+$up resize grow up 10 px or 10 ppt
+  bindsym $mod+$mod2+$down resize shrink height 10 px or 10 ppt
+  bindsym $mod+$mod2+$right resize grow width 10 px or 10 ppt
+
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+  bindsym $mod+bracketleft mode "default"
+}
+
+bindsym $mod+bracketleft mode "normal"
+
+bindsym --release $mod+Escape exec --no-startup-id "sleep 1 && xset dpms force off"
+
+mode "pass-through" {
+    bindsym $mod+Escape mode "default"
+}
+
+#bindcode 127 nop jklsdf
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+underscore mode "pass-through"
+
+bindsym $mod+Shift+g exec which mirror-update > /tmp/output
+
+#bindsym --release $mod+h exec --no-startup-id        "scrot -z ~/%Y-%m-%d_%k:%M:%S.png &> ~/scrotlog"
+client.focused #859900 #859900 #fdf6e3 #859900
+client.focused_inactive #073642 #073642 #eee8d5 #6c71c4
+client.unfocused #073642 #073642 #93a1a1 #586e75
+client.urgent #d33682 #d33682 #fdf6e3 #dc322f
