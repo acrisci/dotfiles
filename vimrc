@@ -17,6 +17,7 @@ Plugin 'https://github.com/ctrlpvim/ctrlp.vim'
 Plugin 'https://github.com/vim-scripts/taglist.vim'
 Plugin 'https://github.com/vim-airline/vim-airline'
 Plugin 'https://github.com/vim-airline/vim-airline-themes'
+Plugin 'https://github.com/PotatoesMaster/i3-vim-syntax'
 
 call vundle#end()
 filetype plugin indent on

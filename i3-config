@@ -1,5 +1,6 @@
 font pango:Fira Mono 8
 exec urxvt
+exec_always disable-standby-fs.py
 exec_always ~/opt/compton/compton
 exec_always pidof clipit || clipit -n
 exec_always pidof xedgewarp || xedgewarp
@@ -7,7 +8,7 @@ exec_always 'hsetroot -solid #073642'
 
 focus_on_window_activation urgent
 
-workspace_layout stacked
+#workspace_layout stacking
 
 bindsym --whole-window $mod+button2 kill
 bindsym --release button2 kill
@@ -19,8 +20,6 @@ for_window [class="Spotify"] border pixel
 for_window [instance="Firebug"] border pixel
 for_window [class="Firefox"] border none
 for_window [title="^Steam - Update News"] kill
-
-for_window [title="96 dpi"] mark foo
 
 # Vim directions
 set $up k
@@ -79,11 +78,11 @@ bindsym $mod+$mod2+v move to workspace number 6; workspace number 6
 # Run
 bindsym $mod+e exec chromium
 bindsym Mod1+Shift+e exec "test -f /tmp/i3-nagbar$DISPLAY.lock || (touch /tmp/i3-nagbar-$USER-$DISPLAY.lock && i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'; rm /tmp/i3-nagbar-$USER-$DISPLAY.lock)"
-bindsym $mod+$mod2+e exec --no-startup-id i3-cmd.py
+bindsym $mod+$mod2+e exec --no-startup-id "i3-cmd.py --menu rofi"
 bindsym $mod+g exec firefox
 bindsym $mod+t exec --no-startup-id urxvt -cd "$(xcwd)"
-bindsym $mod+r exec --no-startup-id dmenu_run -fn 'Fira Mono -20' -f -i
-bindsym mod1+Tab exec --no-startup-id i3-container-commander.py
+bindsym $mod+r exec --no-startup-id rofi -show run
+bindsym mod1+Tab exec --no-startup-id "i3-container-commander.py --menu rofi"
 
 # Focus follows keyboard
 focus_follows_mouse no
@@ -177,28 +176,6 @@ bindsym $mod+$mod2+0 move container to workspace 10; workspace 10
 # reload the configuration file
 bindsym $mod+q reload
 
-# resize window (you can also use the mouse for that)
-mode "normal" {
-  bindsym $left focus left
-  bindsym $up focus up
-  bindsym $down focus down
-  bindsym $right focus right
-
-  bindsym $mod+$left workspace prev_on_output
-  bindsym $mod+$up focus output right
-  bindsym $mod+$down focus output left
-  bindsym $mod+$right workspace next_on_output
-
-  bindsym $mod+$mod2+$left resize shrink left 10 px or 10 ppt
-  bindsym $mod+$mod2+$up resize grow up 10 px or 10 ppt
-  bindsym $mod+$mod2+$down resize shrink height 10 px or 10 ppt
-  bindsym $mod+$mod2+$right resize grow width 10 px or 10 ppt
-
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
-  bindsym $mod+bracketleft mode "default"
-}
-
 bindsym $mod+bracketleft mode "normal"
 
 bindsym --release $mod+Escape exec --no-startup-id "sleep 1 && xset dpms force off"
@@ -217,3 +194,5 @@ client.focused #859900 #859900 #fdf6e3 #859900
 client.focused_inactive #073642 #073642 #eee8d5 #6c71c4
 client.unfocused #073642 #073642 #93a1a1 #586e75
 client.urgent #d33682 #d33682 #fdf6e3 #dc322f
+
+# vim:filetype=i3
