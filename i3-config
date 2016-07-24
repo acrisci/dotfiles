@@ -3,41 +3,22 @@ exec urxvt
 exec_always ~/opt/compton/compton
 exec_always pidof clipit || clipit -n
 exec_always pidof xedgewarp || xedgewarp
-#exec_always sh ~/.fehbg
-#exec_always ~/.i3/scripts/browser-tab-open-focus.js
-exec_always ~/.i3/scripts/disable-standby-fs.py
-#exec_always dunst -geometry 0x
 exec_always 'hsetroot -solid #073642'
-#exec nm-applet
 
 focus_on_window_activation urgent
 
-#fake-outputs 1024x768+0+0, 1024x768+1024+0
-
 workspace_layout stacked
-
-#new_window normal 6
-#for_window [window_type="dialog"] border pixel
 
 bindsym --whole-window $mod+button2 kill
 bindsym --release button2 kill
 bindsym button2 nop
 bindsym button3 move container to output right; focus output right;
-#bindsym button4 kill
-#bindsym $mod+button4 focus up
-#bindsym $mod+button5 focus down
-bindsym button9 move left
-bindsym button8 move right
-#bindsym --whole-window button1 nop
-
-#bindsym a move left
 
 for_window [class="Thunderbird"] border pixel
 for_window [class="Spotify"] border pixel
 for_window [instance="Firebug"] border pixel
 for_window [class="Firefox"] border none
 for_window [title="^Steam - Update News"] kill
-for_window [class="Tor Browser"] border pixel 4, floating enable; exec 'xclip < /dev/null'
 
 for_window [title="96 dpi"] mark foo
 
@@ -54,17 +35,17 @@ set $mod2 Mod1
 bindsym --whole-window --release $mod+b move scratchpad
 bindsym $mod+$mod2+b scratchpad show
 
-workspace 1 output HDMI-0
-workspace 3 output HDMI-0
-workspace 5 output HDMI-0
-workspace 7 output HDMI-0
-workspace 9 output HDMI-0
-workspace 0 output DVI-D-0
-workspace 2 output DVI-D-0
-workspace 4 output DVI-D-0
-workspace 6 output DVI-D-0
-workspace 8 output DVI-D-0
-workspace 10 output DVI-D-0
+workspace 1 output HDMI-1
+workspace 3 output HDMI-1
+workspace 5 output HDMI-1
+workspace 7 output HDMI-1
+workspace 9 output HDMI-1
+workspace 0 output DVI-D-1
+workspace 2 output DVI-D-1
+workspace 4 output DVI-D-1
+workspace 6 output DVI-D-1
+workspace 8 output DVI-D-1
+workspace 10 output DVI-D-1
 
 # Window specific
 assign [class="Spotify"] 6
@@ -98,40 +79,22 @@ bindsym $mod+$mod2+v move to workspace number 6; workspace number 6
 # Run
 bindsym $mod+e exec chromium
 bindsym Mod1+Shift+e exec "test -f /tmp/i3-nagbar$DISPLAY.lock || (touch /tmp/i3-nagbar-$USER-$DISPLAY.lock && i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'; rm /tmp/i3-nagbar-$USER-$DISPLAY.lock)"
-bindsym $mod+$mod2+e exec --no-startup-id ~/.i3/scripts/i3-cmd.py
+bindsym $mod+$mod2+e exec --no-startup-id i3-cmd.py
 bindsym $mod+g exec firefox
 bindsym $mod+t exec --no-startup-id urxvt -cd "$(xcwd)"
-#bindsym $mod+t exec urxvtcd
 bindsym $mod+r exec --no-startup-id dmenu_run -fn 'Fira Mono -20' -f -i
-
-# Audio controls
-#bindsym $mod+Up exec "amixer set Master 2dB+"
-#bindsym $mod+Down exec "amixer set Master 2dB-"
-
-# Remove borders
-#hide_edge_borders both
+bindsym mod1+Tab exec --no-startup-id i3-container-commander.py
 
 # Focus follows keyboard
 focus_follows_mouse no
 mouse_warping none
 
-#exec xfce4-panel
 # Bar options
 bar {
   verbose true
-  #output primary
-  #tray_output DVI-D-0
-  #status_command i3status
   status_command ~/projects/i3-dstatus/i3-dstatus
-  #status_command i3status
   position top
-  #font pango:Fira Mono 22
-  i3bar_command ~/projects/i3/i3bar/i3bar &> /dev/null
   workspace_buttons yes
-  #strip_workspace_numbers yes
-  #bindsym button3 exec skippy-xd
-  #bindsym button4 nop
-  #bindsym button5 nop
   separator_symbol "●"
   colors {
     separator #dc322f
@@ -184,9 +147,6 @@ bindsym $mod+BackSpace floating toggle
 # focus the parent container
 bindsym $mod+p focus parent
 bindsym $mod+n focus child
-
-# focus the child container
-#bindsym $mod+d focus child
 
 # switch to workspace
 bindsym $mod+grave  workspace 0
@@ -247,14 +207,12 @@ mode "pass-through" {
     bindsym $mod+Escape mode "default"
 }
 
-#bindcode 127 nop jklsdf
 bindsym $mod+Right focus right
 
 bindsym $mod+Shift+underscore mode "pass-through"
 
 bindsym $mod+Shift+g exec which mirror-update > /tmp/output
 
-#bindsym --release $mod+h exec --no-startup-id        "scrot -z ~/%Y-%m-%d_%k:%M:%S.png &> ~/scrotlog"
 client.focused #859900 #859900 #fdf6e3 #859900
 client.focused_inactive #073642 #073642 #eee8d5 #6c71c4
 client.unfocused #073642 #073642 #93a1a1 #586e75

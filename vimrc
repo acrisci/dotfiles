@@ -131,4 +131,17 @@ endfunc
 map <F2> :call ToggleNERDTreeRN()<CR>
 
 " YouCompleteMe
+set completeopt-=preview
 let g:ycm_extra_conf_globlist = ['~/projects/*']
+let g:ycm_python_binary_path = '/usr/bin/python3'
+
+" Project specific options
+function! TabFormatting()
+    setlocal tabstop=4
+    setlocal shiftwidth=4
+    setlocal softtabstop=4
+    setlocal textwidth=80
+    setlocal noexpandtab
+endfunction
+
+autocmd BufRead,BufNew ~/projects/sway/* call TabFormatting()
