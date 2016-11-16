@@ -61,6 +61,9 @@ nmap <silent> <C-l> :wincmd l<CR>
 " Spaces instead of tabs
 set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
+" Language specific
+au BufEnter *.{coffee,yml,yaml} set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+
 " Disable auto comment
 au FileType * set fo-=c
 au FileType * set fo-=r
