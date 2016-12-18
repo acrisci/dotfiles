@@ -74,9 +74,6 @@ au FileType * set fo-=c
 au FileType * set fo-=r
 au FileType * set fo-=o
 
-" Language specific
-au bufenter *.coffee :set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
-
 " Buffer switch with alt tab
 nmap <C-Tab> :bn!<CR>
 nmap <C-S-Tab> :bp!<CR>
