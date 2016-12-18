@@ -18,8 +18,11 @@ Plugin 'https://github.com/vim-scripts/taglist.vim'
 Plugin 'https://github.com/vim-airline/vim-airline'
 Plugin 'https://github.com/vim-airline/vim-airline-themes'
 Plugin 'https://github.com/PotatoesMaster/i3-vim-syntax'
-Plugin 'https://github.com/chase/vim-ansible-yaml'
+Plugin 'https://github.com/digitaltoad/vim-pug'
 Plugin 'https://github.com/kchmck/vim-coffee-script'
+Bundle 'https://github.com/mustache/vim-mustache-handlebars'
+Bundle 'https://github.com/chase/vim-ansible-yaml'
+Plugin 'https://github.com/vim-scripts/groovy.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -70,6 +73,9 @@ au BufEnter *.{coffee,yml,yaml} set tabstop=2 shiftwidth=2 softtabstop=2 expandt
 au FileType * set fo-=c
 au FileType * set fo-=r
 au FileType * set fo-=o
+
+" Language specific
+au bufenter *.coffee :set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
 " Buffer switch with alt tab
 nmap <C-Tab> :bn!<CR>
