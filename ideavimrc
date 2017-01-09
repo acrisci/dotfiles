@@ -1,0 +1,9 @@
+imap <C-h> <BS>
+imap <C-d> <Del>
+imap <C-e> <End>
+imap <C-a> <Esc>^i
+imap <C-f> <Right>
+imap <C-b> <Left>
+imap <C-p> <Up>
+imap <C-n> <Down>
+imap <C-j> <CR>
