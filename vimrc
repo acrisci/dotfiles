@@ -23,6 +23,9 @@ Plugin 'https://github.com/kchmck/vim-coffee-script'
 Bundle 'https://github.com/mustache/vim-mustache-handlebars'
 Bundle 'https://github.com/chase/vim-ansible-yaml'
 Plugin 'https://github.com/vim-scripts/groovy.vim'
+Plugin 'https://github.com/pangloss/vim-javascript'
+Plugin 'https://github.com/mxw/vim-jsx'
+Plugin 'https://github.com/vim-scripts/nginx.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -67,7 +70,7 @@ nmap <silent> <C-l> :wincmd l<CR>
 set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
 " Language specific
-au BufEnter *.{coffee,yml,yaml} set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+au BufEnter *.{coffee,yml,yaml,rb} set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
 " Disable auto comment
 au FileType * set fo-=c
@@ -143,6 +146,9 @@ map <F2> :call ToggleNERDTreeRN()<CR>
 set completeopt-=preview
 let g:ycm_extra_conf_globlist = ['~/projects/*']
 let g:ycm_python_binary_path = '/usr/bin/python3'
+
+" JSX
+let g:jsx_ext_required = 0
 
 " Project specific options
 function! TabFormatting()
