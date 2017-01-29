@@ -1,10 +1,18 @@
+command! extraTab -nargs=1 -description "Open an extra tab" :js extraTab("<args>");
+    
+:js <<EOF
+function extraTab(args) {
+    liberator.open(args, liberator.NEW_TAB)
+}
+EOF
+
 " Shame
 imap <CR> <CR> <CR>
-imap <C-t> <esc><esc>:tabnew<CR>
-map <C-t> <esc><esc>:tabnew<CR>
-imap <C-w> <esc><esc>:tabclose<CR>
-map <C-w> <esc><esc>:tabclose<CR>
-"map <C-[> <esc><esc><esc>
+imap <C-t> <esc><esc>:js extraTab('')<CR>
+map <C-t> <esc><esc>:js extraTab('')<CR>
+"imap <C-w> <esc><esc>:tabclose<CR>
+"map <C-w> <esc><esc>:tabclose<CR>
+map <C-[> <esc><esc><esc>
 
 " Compat
 nmap <A-d> <F6>
@@ -59,8 +67,8 @@ vmap <C-h> <bs>
 vmap <C-p> <Up>
 vmap <C-n> <Down>
 
-command -nargs=* wp open wikipedia <args>
-command -nargs=* sp open startpage <args>
+"command -nargs=* wp open wikipedia <args>
+"command -nargs=* sp open startpage <args>
 
 " ==Vimperator_Color_Scheme==
 " name: Darkness
