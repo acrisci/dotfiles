@@ -7,3 +7,8 @@ imap <C-b> <Left>
 imap <C-p> <Up>
 imap <C-n> <Down>
 imap <C-j> <CR>
+
+map <C-h> <C-w>h
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-l> <C-w>l
