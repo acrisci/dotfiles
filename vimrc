@@ -18,14 +18,9 @@ Plugin 'https://github.com/vim-scripts/taglist.vim'
 Plugin 'https://github.com/vim-airline/vim-airline'
 Plugin 'https://github.com/vim-airline/vim-airline-themes'
 Plugin 'https://github.com/PotatoesMaster/i3-vim-syntax'
-Plugin 'https://github.com/digitaltoad/vim-pug'
-Plugin 'https://github.com/kchmck/vim-coffee-script'
-Bundle 'https://github.com/mustache/vim-mustache-handlebars'
-Bundle 'https://github.com/chase/vim-ansible-yaml'
-Plugin 'https://github.com/vim-scripts/groovy.vim'
 Plugin 'https://github.com/pangloss/vim-javascript'
-Plugin 'https://github.com/mxw/vim-jsx'
-Plugin 'https://github.com/vim-scripts/nginx.vim'
+Plugin 'https://github.com/leafgarland/typescript-vim'
+Plugin 'https://github.com/rdnetto/YCM-Generator'
 
 call vundle#end()
 filetype plugin indent on
@@ -37,6 +32,10 @@ set guicursor+=a:blinkon0
 set background=dark
 colorscheme solarized
 hi cursor guibg=#D33682 guifg=#2AA198
+
+" Mouse
+nmap <X1Mouse> <C-o>
+nmap <X2Mouse> <C-i>
 
 if has("gui_running")
     map  <silent>  <S-Insert>  "+p
@@ -77,7 +76,7 @@ au FileType * set fo-=c
 au FileType * set fo-=r
 au FileType * set fo-=o
 
-" Buffer switch with alt tab
+" Buffer switch with ctrl tab
 nmap <C-Tab> :bn!<CR>
 nmap <C-S-Tab> :bp!<CR>
 
@@ -98,6 +97,10 @@ imap <C-k> <C-o>D
 nmap <leader><leader> :split<cr>
 nmap <leader>w :w<CR>
 nmap <leader>s :split<CR>
+
+" Easy clear hilighting
+nmap <silent> <C-[> :noh<CR>
+nmap <silent> <Esc> :noh<CR>
 
 " Airline
 let g:airline_powerline_fonts=0
@@ -146,6 +149,7 @@ map <F2> :call ToggleNERDTreeRN()<CR>
 set completeopt-=preview
 let g:ycm_extra_conf_globlist = ['~/projects/*']
 let g:ycm_python_binary_path = '/usr/bin/python3'
+nmap <2-LeftMouse> :YcmCompleter GoTo<CR>
 
 " JSX
 let g:jsx_ext_required = 0
@@ -160,3 +164,4 @@ function! TabFormatting()
 endfunction
 
 autocmd BufRead,BufNew ~/projects/sway/* call TabFormatting()
+autocmd BufRead,BufNew ~/projects/wlroots/* call TabFormatting()
