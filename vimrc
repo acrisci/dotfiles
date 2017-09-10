@@ -21,6 +21,9 @@ Plugin 'https://github.com/PotatoesMaster/i3-vim-syntax'
 Plugin 'https://github.com/pangloss/vim-javascript'
 Plugin 'https://github.com/leafgarland/typescript-vim'
 Plugin 'https://github.com/rdnetto/YCM-Generator'
+Plugin 'https://github.com/stfl/meson.vim'
+Plugin 'https://github.com/rust-lang/rust.vim'
+Plugin 'https://github.com/cespare/vim-toml'
 
 call vundle#end()
 filetype plugin indent on
@@ -32,6 +35,9 @@ set guicursor+=a:blinkon0
 set background=dark
 colorscheme solarized
 hi cursor guibg=#D33682 guifg=#2AA198
+
+" vim bug that sets cursor to blinking for some reason
+au VimEnter * silent exec "!printf '\033[?12l'"
 
 " Mouse
 nmap <X1Mouse> <C-o>
@@ -50,6 +56,10 @@ if has("gui_running")
     set go-=L
     "use console dialogs instead of popups
     set go+=c
+
+    " Easy clear hilighting
+    nmap <silent> <C-[> :noh<CR>
+    nmap <silent> <Esc> :noh<CR>
 endif
 
 " Disable code folding
@@ -92,15 +102,14 @@ imap <C-v> <C-o>p
 imap <C-a> <C-o>I
 imap <C-e> <C-o>A
 imap <C-k> <C-o>D
+imap <C-u> <C-o>v0d
 
 " Leader shortcuts
 nmap <leader><leader> :split<cr>
 nmap <leader>w :w<CR>
 nmap <leader>s :split<CR>
-
-" Easy clear hilighting
-nmap <silent> <C-[> :noh<CR>
-nmap <silent> <Esc> :noh<CR>
+nmap <leader>f :YcmDiags<CR>
+nmap <leader>l /\%>80v.\+<CR>
 
 " Airline
 let g:airline_powerline_fonts=0
@@ -149,6 +158,7 @@ map <F2> :call ToggleNERDTreeRN()<CR>
 set completeopt-=preview
 let g:ycm_extra_conf_globlist = ['~/projects/*']
 let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_rust_src_path = '~/projects/rust/src'
 nmap <2-LeftMouse> :YcmCompleter GoTo<CR>
 
 " JSX
