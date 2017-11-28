@@ -24,10 +24,14 @@ Plugin 'https://github.com/rdnetto/YCM-Generator'
 Plugin 'https://github.com/stfl/meson.vim'
 Plugin 'https://github.com/rust-lang/rust.vim'
 Plugin 'https://github.com/cespare/vim-toml'
+Plugin 'https://github.com/tpope/vim-fugitive'
 
 call vundle#end()
 filetype plugin indent on
 syntax enable
+
+" grep search results in a window
+command! -nargs=+ Grep execute 'silent grep! -I -r -n . -e <args>' | copen | execute 'silent /<args>'
 
 " Look and feel
 set guifont=Fira\ Mono\ 15
@@ -79,7 +83,7 @@ nmap <silent> <C-l> :wincmd l<CR>
 set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
 " Language specific
-au BufEnter *.{coffee,yml,yaml,rb} set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+au BufEnter *.{ts,coffee,yml,yaml,rb} set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
 " Disable auto comment
 au FileType * set fo-=c
@@ -102,7 +106,7 @@ imap <C-v> <C-o>p
 imap <C-a> <C-o>I
 imap <C-e> <C-o>A
 imap <C-k> <C-o>D
-imap <C-u> <C-o>v0d
+imap <C-u> <C-o>d^
 
 " Leader shortcuts
 nmap <leader><leader> :split<cr>
@@ -159,6 +163,7 @@ set completeopt-=preview
 let g:ycm_extra_conf_globlist = ['~/projects/*']
 let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_rust_src_path = '~/projects/rust/src'
+let g:ycm_always_populate_location_list = 1
 nmap <2-LeftMouse> :YcmCompleter GoTo<CR>
 
 " JSX
