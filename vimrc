@@ -30,8 +30,9 @@ call vundle#end()
 filetype plugin indent on
 syntax enable
 
-" grep search results in a window
-command! -nargs=+ Grep execute 'silent grep! -I -r -n . -e <args>' | copen | execute 'silent /<args>'
+" grep command
+command! -nargs=+ Grep execute 'silent grep! -I -r -n . -e "<args>" --exclude="tags"' | copen | execute 'silent /<args>'
+nmap <leader>g :Grep <c-r>=expand("<cword>")<cr><cr>
 
 " Look and feel
 set guifont=Fira\ Mono\ 15
@@ -174,7 +175,6 @@ function! TabFormatting()
     setlocal tabstop=4
     setlocal shiftwidth=4
     setlocal softtabstop=4
-    setlocal textwidth=80
     setlocal noexpandtab
 endfunction
 
