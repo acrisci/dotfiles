@@ -31,7 +31,7 @@ filetype plugin indent on
 syntax enable
 
 " grep command
-command! -nargs=+ Grep execute 'silent grep! -I -r -n . -e "<args>" --exclude="tags"' | copen | execute 'silent /<args>'
+command! -nargs=+ Grep execute 'silent grep! -I -r -n . -e "<args>" --exclude="tags" --exclude-dir="build" --exclude-dir="old" --exclude="wlr.log"' | copen | execute 'silent /<args>'
 nmap <leader>g :Grep <c-r>=expand("<cword>")<cr><cr>
 
 " Look and feel
@@ -44,9 +44,18 @@ hi cursor guibg=#D33682 guifg=#2AA198
 " vim bug that sets cursor to blinking for some reason
 au VimEnter * silent exec "!printf '\033[?12l'"
 
+" worthless ex-mode
+nmap Q <nop>
+
 " Mouse
 nmap <X1Mouse> <C-o>
 nmap <X2Mouse> <C-i>
+
+function! DistractionFreeMode()
+    lclose
+    cclose
+    NERDTreeClose
+endfunction
 
 if has("gui_running")
     map  <silent>  <S-Insert>  "+p
@@ -62,9 +71,8 @@ if has("gui_running")
     "use console dialogs instead of popups
     set go+=c
 
-    " Easy clear hilighting
-    nmap <silent> <C-[> :noh<CR>
-    nmap <silent> <Esc> :noh<CR>
+    nmap <silent> <C-[> :call DistractionFreeMode() <bar> noh<CR>
+    nmap <silent> <Esc> :call DistractionFreeMode() <bar> noh<CR>
 endif
 
 " Disable code folding
@@ -148,7 +156,11 @@ map <F3> :call ToggleTlist()<CR>
 nmap <leader>] :CtrlPTag<CR>
 
 let g:ctrlp_extensions = ['tag', 'quickfix' ]
-let g:ctrlp_custom_ignore = 'node_modules\|bower_components\|\.pyc$\|\.o$'
+let g:ctrlp_custom_ignore =
+    \ {
+    \ 'dir': 'build\|node_modules\|old',
+    \ 'file': '\.pyc$\|\.o$',
+    \ }
 "let g:ctrlp_working_path_mode = 'c'
 
 " NERDTree
