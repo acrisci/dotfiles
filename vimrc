@@ -120,9 +120,8 @@ imap <C-u> <C-o>d^
 " Leader shortcuts
 nmap <leader><leader> :split<cr>
 nmap <leader>w :w<CR>
-nmap <leader>s :split<CR>
 nmap <leader>f :YcmDiags<CR>
-nmap <leader>l /\%>80v.\+<CR>
+nmap <leader>s /\%>80v.\+<CR>
 
 " Airline
 let g:airline_powerline_fonts=0
