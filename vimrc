@@ -29,17 +29,16 @@ Plugin 'https://github.com/tpope/vim-fugitive'
 call vundle#end()
 filetype plugin indent on
 syntax enable
+set mouse=a
 
 " grep command
-command! -nargs=+ Grep execute 'silent grep! -I -r -n . -e "<args>" --exclude="tags" --exclude-dir="build" --exclude-dir="old" --exclude="wlr.log"' | copen | execute 'silent /<args>'
+command! -nargs=+ Grep execute 'silent grep! -I -r -n . -e "<args>" --exclude-dir=".git" --exclude-dir="env" --exclude="tags" --exclude-dir="build" --exclude-dir="old" --exclude="wlr.log"' | copen | execute 'silent /<args>'
 nmap <leader>g :Grep <c-r>=expand("<cword>")<cr><cr>
 
 " Look and feel
-set guifont=Fira\ Mono\ 15
+set guifont=Fira\ Mono\ 13
 set guicursor+=a:blinkon0
 set background=dark
-colorscheme solarized
-hi cursor guibg=#D33682 guifg=#2AA198
 
 " vim bug that sets cursor to blinking for some reason
 au VimEnter * silent exec "!printf '\033[?12l'"
@@ -58,6 +57,8 @@ function! DistractionFreeMode()
 endfunction
 
 if has("gui_running")
+    colorscheme solarized
+    hi cursor guibg=#D33682 guifg=#2AA198
     map  <silent>  <S-Insert>  "+p
     imap <silent>  <S-Insert>  <Esc>"+pa
     set go-=T
@@ -176,6 +177,7 @@ let g:ycm_extra_conf_globlist = ['~/projects/*']
 let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_rust_src_path = '~/projects/rust/src'
 let g:ycm_always_populate_location_list = 1
+let g:ycm_min_num_of_chars_for_completion = 99
 nmap <2-LeftMouse> :YcmCompleter GoTo<CR>
 
 " JSX
@@ -191,3 +193,6 @@ endfunction
 
 autocmd BufRead,BufNew ~/projects/sway/* call TabFormatting()
 autocmd BufRead,BufNew ~/projects/wlroots/* call TabFormatting()
+
+"highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+"match OverLength /\%81v.\+/
