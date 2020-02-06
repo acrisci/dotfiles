@@ -25,11 +25,14 @@ Plugin 'https://github.com/stfl/meson.vim'
 Plugin 'https://github.com/rust-lang/rust.vim'
 Plugin 'https://github.com/cespare/vim-toml'
 Plugin 'https://github.com/tpope/vim-fugitive'
+Plugin 'https://github.com/dhruvasagar/vim-table-mode'
+Plugin 'https://github.com/vim/killersheep'
 
 call vundle#end()
 filetype plugin indent on
 syntax enable
 set mouse=a
+set incsearch nois
 
 " grep command
 command! -nargs=+ Grep execute 'silent grep! -I -r -n . -e "<args>" --exclude-dir=".git" --exclude-dir="env" --exclude="tags" --exclude-dir="build" --exclude-dir="old" --exclude="wlr.log"' | copen | execute 'silent /<args>'
@@ -93,7 +96,7 @@ nmap <silent> <C-l> :wincmd l<CR>
 set tabstop=4 shiftwidth=4 softtabstop=4 expandtab
 
 " Language specific
-au BufEnter *.{ts,coffee,yml,yaml,rb} set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
+au BufEnter *.{js,ts,coffee,yml,yaml,rb} set tabstop=2 shiftwidth=2 softtabstop=2 expandtab
 
 " Disable auto comment
 au FileType * set fo-=c
@@ -174,10 +177,12 @@ map <F2> :call ToggleNERDTreeRN()<CR>
 " YouCompleteMe
 set completeopt-=preview
 let g:ycm_extra_conf_globlist = ['~/projects/*']
-let g:ycm_python_binary_path = '/usr/bin/python3'
-let g:ycm_rust_src_path = '~/projects/rust/src'
+"let g:ycm_python_binary_path = '/usr/bin/python3'
+"let g:ycm_rust_src_path = '~/projects/rust/src'
 let g:ycm_always_populate_location_list = 1
 let g:ycm_min_num_of_chars_for_completion = 99
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_server_log_level = 'debug'
 nmap <2-LeftMouse> :YcmCompleter GoTo<CR>
 
 " JSX
